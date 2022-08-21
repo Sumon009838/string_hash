@@ -1,0 +1,30 @@
+void cal()
+{
+    ll a=1;
+    p[0]=1;
+    inv[0]=1;
+    for(ll i=1;i<=100000;i++)
+    {
+        a=(a*31)%mod;
+        p[i]=a;
+        inv[i]=pow1(a,mod-2);
+    }
+}
+void string_hash(string &s)
+{
+    ll sum=0;
+    for(ll i=0;i<s.size();i++)
+    {
+        ll a=p[i]*(s[i]-96);
+        sum=(sum+a)%mod;
+        ar[i]=sum;
+    }
+}
+ll hash_query(ll i,ll j)
+{
+    ll a=ar[j];
+    if(i>0)
+    a=(a+mod)-ar[i-1];
+    a=(a*inv[i])%mod;
+    return a;
+}
